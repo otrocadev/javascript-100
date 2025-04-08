@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      header {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 100dvw;
+        justify-content: start;
+        align-content: center;
+        z-index: 1;
+        animation: logoIn 1200ms ease-in;
+      }
+
+      #logo-hntr {
+        height: 16rem;
+        margin: auto;
+      }
+
+      #moto {
+        width: 100dvw;
+        height: 100dvh;
+        object-fit: cover;
+        position: fixed;
+      }
+
+      main {
+        height: 200dvh;
+      }
+
+      @keyframes logoIn {
+        from {
+          transform: translateY(-200px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <script type="module">
+      const moto = document.querySelector('#moto')
+      const MAX_FRAMES = 61
+      // Max scroll available
+      let maxScroll = document.documentElement.scrollHeight - window.innerHeight
+
+      window.addEventListener('resize', () => {
+        maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      })
+
+      window.addEventListener('scroll', () => {
+        // Current position of the scroll
+        const scrollPosition = window.scrollY
+        const scrollFraction = scrollPosition / maxScroll
+        // Calculate current frame
+        const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1
+        const frameId = frame.toString().padStart(3, 0)
+        console.log(frameId)
+
+        moto.src = `./frames/hunter-${frameId}.avif`
+      })
+    </script>
+  </head>
+  <body>
+    <header>
+      <img id="logo-hntr" src="./logo.png" alt="" />
+    </header>
+    <main>
+      <img
+        id="moto"
+        src="frames/hunter-001.avif"
+        alt="Royal Enfield Hunter 350"
+      />
+    </main>
+  </body>
+</html>

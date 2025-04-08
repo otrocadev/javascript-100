@@ -4,11 +4,14 @@ export const PROJECTS = [
     title: 'Tinder Swipe',
     hidden: false,
     description: 'A tinder swipe behaviour clone.',
-    learnings: [
-      'DOM',
-      'Animaciones con gestos',
-      'Eventos de mouse y touch',
-      'Transiciones CSS',
-    ],
+    learnings: ['DOM', 'Gesture animations', 'Mouse and touch events'],
+  },
+  {
+    slug: '02-moto-scroll',
+    title: 'Moto Scroll',
+    hidden: false,
+    description:
+      'An animation that spins the Royal Enfield HNTR 350 with the scroll position.',
+    learnings: ['DOM', 'Animation on Scroll', 'Frames handling'],
   },
 ]
