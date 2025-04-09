@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preload" as="image" href="./frames/hunter-001.avif" />
+
     <style>
       body {
         margin: 0;
@@ -52,21 +54,24 @@
 
     <script type="module">
       const moto = document.querySelector('#moto')
+      const head = document.querySelector('head')
       const MAX_FRAMES = 61
-      // Max scroll available
-      let maxScroll = document.documentElement.scrollHeight - window.innerHeight
 
-      function preloadFrames() {
-        Array.from({ length: MAX_FRAMES }).forEach((_, index) => {
-          const frameId = (index + 1).toString().padStart(3, '0')
-          const srcImg = `./frames/hunter-${frameId}.avif`
-
-          const img = new Image()
-          img.src = srcImg
-        })
+      async function preloadFrames() {
+        for (let i = 1; i <= MAX_FRAMES; i++) {
+          const frameId = i.toString().padStart(3, '0')
+          const link = document.createElement('link')
+          link.rel = 'preload'
+          link.as = 'image'
+          link.href = `./frames/hunter-${frameId}.avif`
+          head.appendChild(link)
+        }
       }
 
-      preloadFrames()
+      await preloadFrames()
+
+      // Max scroll available
+      let maxScroll = document.documentElement.scrollHeight - window.innerHeight
 
       window.addEventListener('resize', () => {
         maxScroll = document.documentElement.scrollHeight - window.innerHeight
