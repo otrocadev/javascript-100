@@ -28,8 +28,10 @@
       #moto {
         width: 100dvw;
         height: 100dvh;
-        object-fit: cover;
+        background-size: cover;
         position: fixed;
+        background-position: center;
+        background-image: url('./frames/hunter-001.avif');
       }
 
       main {
@@ -54,6 +56,18 @@
       // Max scroll available
       let maxScroll = document.documentElement.scrollHeight - window.innerHeight
 
+      function preloadFrames() {
+        Array.from({ length: MAX_FRAMES }).forEach((_, index) => {
+          const frameId = (index + 1).toString().padStart(3, '0')
+          const srcImg = `./frames/hunter-${frameId}.avif`
+
+          const img = new Image()
+          img.src = srcImg
+        })
+      }
+
+      preloadFrames()
+
       window.addEventListener('resize', () => {
         maxScroll = document.documentElement.scrollHeight - window.innerHeight
       })
@@ -65,9 +79,9 @@
         // Calculate current frame
         const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1
         const frameId = frame.toString().padStart(3, 0)
-        console.log(frameId)
+        const srcImg = `url('./frames/hunter-${frameId}.avif')`
 
-        moto.src = `./frames/hunter-${frameId}.avif`
+        moto.style.backgroundImage = srcImg
       })
     </script>
   </head>
@@ -76,11 +90,7 @@
       <img id="logo-hntr" src="./logo.png" alt="" />
     </header>
     <main>
-      <img
-        id="moto"
-        src="frames/hunter-001.avif"
-        alt="Royal Enfield Hunter 350"
-      />
+      <div id="moto" />
     </main>
   </body>
 </html>
