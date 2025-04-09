@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preload" as="image" href="./frames/hunter-001.avif" />
+
     <style>
       body {
         margin: 0;
@@ -28,8 +30,10 @@
       #moto {
         width: 100dvw;
         height: 100dvh;
-        object-fit: cover;
+        background-size: cover;
         position: fixed;
+        background-position: center;
+        background-image: url('./frames/hunter-001.avif');
       }
 
       main {
@@ -50,7 +54,22 @@
 
     <script type="module">
       const moto = document.querySelector('#moto')
+      const head = document.querySelector('head')
       const MAX_FRAMES = 61
+
+      async function preloadFrames() {
+        for (let i = 1; i <= MAX_FRAMES; i++) {
+          const frameId = i.toString().padStart(3, '0')
+          const link = document.createElement('link')
+          link.rel = 'preload'
+          link.as = 'image'
+          link.href = `./frames/hunter-${frameId}.avif`
+          head.appendChild(link)
+        }
+      }
+
+      await preloadFrames()
+
       // Max scroll available
       let maxScroll = document.documentElement.scrollHeight - window.innerHeight
 
@@ -65,9 +84,9 @@
         // Calculate current frame
         const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1
         const frameId = frame.toString().padStart(3, 0)
-        console.log(frameId)
+        const srcImg = `url('./frames/hunter-${frameId}.avif')`
 
-        moto.src = `./frames/hunter-${frameId}.avif`
+        moto.style.backgroundImage = srcImg
       })
     </script>
   </head>
@@ -76,11 +95,7 @@
       <img id="logo-hntr" src="./logo.png" alt="" />
     </header>
     <main>
-      <img
-        id="moto"
-        src="frames/hunter-001.avif"
-        alt="Royal Enfield Hunter 350"
-      />
+      <div id="moto" />
     </main>
   </body>
 </html>
