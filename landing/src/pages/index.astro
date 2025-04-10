@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Projects from '../components/Projects.astro'
+import Hero from '../components/Hero.astro'
 ---
 
 <Layout title="100 JavaScript projects">
-  <main
-    class="pt-12 min-h-screen flex gap-y-20 flex-col justify-between px-8 relative"
-  >
+  <main class="pt-12 min-h-screen flex gap-y-20 flex-col px-8 relative">
+    <Hero />
     <Projects />
   </main>
 </Layout>

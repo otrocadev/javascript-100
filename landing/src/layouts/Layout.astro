@@ -21,7 +21,9 @@ const { title } = Astro.props
     <title>Astro Basics</title>
   </head>
   <body>
-    <slot />
+    <div id="bg">
+      <slot />
+    </div>
   </body>
 
   <style is:global>
@@ -36,6 +38,7 @@ const { title } = Astro.props
       --slate-gray: #b4b9c0;
       --anti-flash-white: #efefef;
       --screaming-green: #4cd625;
+      --background-lines: #2e4a6620;
     }
 
     html,
@@ -52,12 +55,27 @@ const { title } = Astro.props
       background: var(--navy);
     }
 
+    h1,
     h2,
     h3 {
       color: var(--screaming-green);
       font-family: 'Anonymous Pro', serif;
       font-weight: 700;
       font-style: normal;
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      background-image: linear-gradient(
+          to right,
+          var(--background-lines) 1px,
+          transparent 1px
+        ),
+        linear-gradient(to bottom, var(--background-lines) 1px, transparent 1px);
+      background-size: 64px 64px;
     }
 
     .btn {
