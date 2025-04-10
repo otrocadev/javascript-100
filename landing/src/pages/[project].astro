@@ -17,12 +17,35 @@ const { project } = Astro.params
 const index = PROJECTS.findIndex((p) => p.slug === project)
 const info = PROJECTS[index]
 const number = `${index + 1}`.padStart(2, '0')
+const laptop = info.laptop
 ---
 
 <Layout title={`JS Project #${number}: ${info.title}`}>
-  <iframe
-    title={`${info.title}`}
-    class="w-screen h-dvh"
-    src={`/projects/${project}/index.html`}></iframe>
-  <InfoProject info={{ ...info, number }} />
+  {
+    laptop ? (
+      <main class="flex h-screen w-screen flex-col">
+        <div class="w-4/5 aspect-16/10 max-w-6xl m-auto mb-0 rounded-t-4xl rounded-b-lg overflow-hidden border-1 border-slate-400 bg-black p-4 pb-5">
+          <iframe
+            title={`${info.title}`}
+            class="w-full h-full rounded-2xl"
+            src={`/projects/${project}/index.html`}
+          />
+        </div>
+        <div class="max-w-7xl m-auto mt-0">
+          <img src="/macbook-mockup.png" alt="" />
+        </div>
+        <InfoProject info={{ ...info, number }} />
+      </main>
+    ) : (
+      <main class="flex h-screen w-screen flex-col">
+        <iframe
+          title={`${info.title}`}
+          class="w-full h-full rounded-2xl"
+          src={`/projects/${project}/index.html`}
+        />
+
+        <InfoProject info={{ ...info, number }} />
+      </main>
+    )
+  }
 </Layout>
