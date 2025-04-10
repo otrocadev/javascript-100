@@ -15,7 +15,7 @@ const finalProjects = PROJECTS.filter((project) => !project.hidden)
       const num = `${index + 1}`.padStart(2, '0')
 
       return (
-        <article class="relative items-center overflow-hidden text-black rounded-lg bg-[var(--seablue)]">
+        <article class="project-card">
           <a href={`/${project.slug}`}>
             <span class="transition-all absolute top-2 left-2 -rotate-12 text-2xl font-bold">
               #{num}
