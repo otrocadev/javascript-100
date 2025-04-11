@@ -1,10 +1,11 @@
 ---
 const { info } = Astro.props
-const { theme = {} } = info
-const { isDark = false } = theme
 ---
 
-<div class="hidden sm:block absolute left-4 bottom-4 px-8 py-1 rounded-lg">
+<div
+  id="container"
+  class="hidden sm:block absolute left-4 bottom-4 px-8 py-1 rounded-lg"
+>
   <div class="flex flex-col gap-4">
     <div
       class="flex items-center justify-center gap-4 bg-[var(--seablue)] rounded-xl p-2"
@@ -34,3 +35,19 @@ const { isDark = false } = theme
     >
   </div>
 </div>
+
+<style>
+  #container {
+    animation: projectInfoIn 300ms ease-in;
+  }
+  @keyframes projectInfoIn {
+    from {
+      transform: translateY(60px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+</style>

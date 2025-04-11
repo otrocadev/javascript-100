@@ -29,7 +29,10 @@ const finalProjects = PROJECTS.slice().reverse()
         const num = `${index + 1}`.padStart(2, '0')
 
         return (
-          <article class="project-card">
+          <article
+            transition:name={`animation-${project.slug}`}
+            class="project-card"
+          >
             <a href={`/${project.slug}`}>
               <span class="transition-all text-black absolute top-2 left-2 -rotate-12 text-2xl font-bold">
                 #{num}
