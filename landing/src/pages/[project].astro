@@ -28,14 +28,14 @@ const laptop = info.laptop
   >
     {
       laptop ? (   
-          <div class="w-4/5 aspect-16/10 max-w-6xl m-auto mb-0 rounded-t-4xl rounded-b-lg overflow-hidden border-1 border-slate-400 bg-black p-4 pb-5">
+          <div class="w-full sm:w-4/5 h-full sm:h-auto sm:aspect-16/10 sm:max-w-6xl m-auto mb-0 sm:rounded-t-4xl sm:rounded-b-lg overflow-hidden sm:border-1 sm:border-slate-400 sm:bg-black sm:p-4 sm:pb-5">
             <iframe
               title={`${info.title}`}
-              class="w-full h-full rounded-2xl"
+              class="w-full h-full sm:rounded-2xl"
               src={`/projects/${project}/index.html`}
             />
           </div>
-          <div class="max-w-7xl m-auto mt-0">
+          <div class="hidden sm:block max-w-7xl m-auto mt-0">
             <img src="/macbook-mockup.avif" alt="" />
           </div>
           
