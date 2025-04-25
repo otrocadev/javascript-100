@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Cuando será Marc Marquez campeón de MotoGP 2025</h1>
+    </header>
+    <main>
+      <div id="marc-section">
+        <div>
+          <div id="hero">
+            <span>#MM93</span>
+            <h2>Marc Marquez</h2>
+          </div>
+
+          <div id="stats">
+            <div class="points-section">
+              <span>PUNTOS</span>
+              <p id="actual-score" class="score">44</p>
+            </div>
+            <div class="points-section">
+              <span>VICTORIAS SPRINT</span>
+              <p id="sprints" class="score">44</p>
+            </div>
+            <div class="points-section">
+              <span>VICTORIAS GP</span>
+              <p id="gps" class="score">44</p>
+            </div>
+            <div class="points-section">
+              <span>% VICTORIAS</span>
+              <p id="percent" class="score">44</p>
+            </div>
+          </div>
+
+          <div class="points-section total-points">
+            <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
+            <p id="mm93points" class="score"></p>
+          </div>
+        </div>
+        <div id="foto-marc"></div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nova+Mono&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Comfortaa', 'Lucida Sans', 'Lucida Sans Regular',
+      'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    color: aliceblue;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: black;
+    margin: 0;
+    padding: 2rem;
+    height: auto;
+    min-height: 7vh;
+    text-align: center;
+  }
+
+  main {
+    margin: auto;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(22, 22, 22);
+  }
+
+  h2 {
+    font-size: 48px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .score {
+    font-family: Nova Mono;
+    font-weight: 700;
+    font-size: 32px;
+  }
+
+  .points-section {
+    background: rgb(23, 28, 33);
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 12px;
+    min-width: 8rem;
+  }
+
+  #marc-section {
+    display: flex;
+  }
+
+  #foto-marc {
+    background-image: url('./mm93.webp');
+    width: 300px;
+    height: 300px;
+  }
+
+  .total-points {
+    padding: 2rem;
+    font-size: 12px;
+  }
+
+  #stats {
+    display: grid;
+    margin-bottom: 3rem;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  #mm93points {
+    font-size: 120px;
+    margin: 0;
+  }
+</style>
+
+<script type="module">
+  // Changing every GP
+  const mm93points = 123
+  const mm93SprintWins = 4
+  const mm93GPWins = 3
+  const persecutorPoints = 106
+  const lastSprint = 4
+  const lastGP = 4
+
+  // Static Data
+  const totalRaces = lastGP + lastSprint
+  const remainingGPs = 22 - lastGP
+  const remainingSprints = 22 - lastSprint
+  const maxPointsPerGP = 25
+  const maxPointsPerSprint = 12
+
+  const percentWins = ((mm93GPWins + mm93SprintWins) / totalRaces) * 100
+
+  const totalPersecutorPosiblePoints =
+    persecutorPoints +
+    remainingGPs * maxPointsPerGP +
+    remainingSprints * maxPointsPerSprint
+  const pointsRemainingMM93Championship =
+    totalPersecutorPosiblePoints + 1 - mm93points
+
+  // inject points into the HTML document
+  const actualScore = document.getElementById('actual-score')
+  const sprints = document.getElementById('sprints')
+  const gps = document.getElementById('gps')
+  const percent = document.getElementById('percent')
+  const mm93renderPoints = document.getElementById('mm93points')
+  actualScore.innerHTML = mm93points
+  sprints.innerHTML = mm93SprintWins
+  gps.innerHTML = mm93GPWins
+  percent.innerHTML = percentWins + '%'
+  mm93renderPoints.innerHTML = pointsRemainingMM93Championship
+</script>
