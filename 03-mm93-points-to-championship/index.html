@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Puntos restantes MM93</title>
   </head>
   <body>
     <header>
       <h1>Cuando será Marc Marquez campeón de MotoGP 2025</h1>
     </header>
-    <main>
-      <div id="marc-section">
+    <section id="marc-section">
+      <div id="marc-points">
         <div>
           <div id="hero">
             <span>#MM93</span>
@@ -41,9 +41,9 @@
             <p id="mm93points" class="score"></p>
           </div>
         </div>
-        <div id="foto-marc"></div>
+        <img id="marc-img" src="./mm93.webp" alt="Marc Marquez MotoGP 2025 season image - Ducati Lenovo Team"></img>
       </div>
-    </main>
+    </section>
   </body>
 </html>
 
@@ -59,6 +59,8 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background: rgb(22, 22, 22);
+
   }
 
   header {
@@ -70,7 +72,7 @@
     text-align: center;
   }
 
-  main {
+  #marc-section {
     margin: auto;
     width: 100vw;
     height: 100%;
@@ -78,15 +80,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgb(22, 22, 22);
+    max-width: 1024px;
   }
 
   h2 {
     font-size: 48px;
-  }
-
-  img {
-    width: 100%;
   }
 
   .score {
@@ -108,14 +106,14 @@
     min-width: 8rem;
   }
 
-  #marc-section {
+  #marc-points {
     display: flex;
   }
 
-  #foto-marc {
-    background-image: url('./mm93.webp');
-    width: 300px;
-    height: 300px;
+  #marc-img {
+    mask-image: linear-gradient(black 80%, transparent);
+    width: 100%;
+    margin-right: -2rem;
   }
 
   .total-points {
@@ -138,21 +136,35 @@
 </style>
 
 <script type="module">
-  // Changing every GP
-  const mm93points = 123
-  const mm93SprintWins = 4
-  const mm93GPWins = 3
+  const DATA_ENDPOINT = 'https://680ba7bdd5075a76d98bf6b8.mockapi.io/mm93pointstochampion/mm93data'
+  const RACES_ENDPOINT = 'https://680ba7bdd5075a76d98bf6b8.mockapi.io/mm93pointstochampion/races'
+  
+  // Fetching data to calculate stats
+  const racersData = await fetch(DATA_ENDPOINT)
+    .then(res => res.json())
+    .then(data => {return data})
+    .catch(err => console.error(error))
+  
+  const racesData = await fetch(RACES_ENDPOINT)
+    .then(res => res.json())
+    .then(data => {return data})
+    .catch(err => console.error(error))
+  
+  
+  // API data
+  const mm93points = racersData[0].points
+  const mm93SprintWins = racersData[0].sprintWins
+  const mm93GPWins = racersData[0].GPWins
   const persecutorPoints = 106
-  const lastSprint = 4
-  const lastGP = 4
+  const lastSprint = racesData[0].sprints
+  const lastGP = racesData[0].gps
 
-  // Static Data
+  // Derived Data
   const totalRaces = lastGP + lastSprint
   const remainingGPs = 22 - lastGP
   const remainingSprints = 22 - lastSprint
   const maxPointsPerGP = 25
   const maxPointsPerSprint = 12
-
   const percentWins = ((mm93GPWins + mm93SprintWins) / totalRaces) * 100
 
   const totalPersecutorPosiblePoints =
@@ -162,12 +174,15 @@
   const pointsRemainingMM93Championship =
     totalPersecutorPosiblePoints + 1 - mm93points
 
-  // inject points into the HTML document
+  
+  // ubicate HTML elements
   const actualScore = document.getElementById('actual-score')
   const sprints = document.getElementById('sprints')
   const gps = document.getElementById('gps')
   const percent = document.getElementById('percent')
   const mm93renderPoints = document.getElementById('mm93points')
+
+  // inject points into the HTML document
   actualScore.innerHTML = mm93points
   sprints.innerHTML = mm93SprintWins
   gps.innerHTML = mm93GPWins
