@@ -9,41 +9,62 @@
     <header>
       <h1>Cuando será Marc Marquez campeón de MotoGP 2025</h1>
     </header>
-    <section id="marc-section">
-      <div id="marc-points">
-        <div>
-          <div id="hero">
-            <span>#MM93</span>
-            <h2>Marc Marquez</h2>
-          </div>
+    <main>
+      <section id="marc-section">
+        <div id="marc-points-section">
+          <div>
+            <div id="hero">
+              <span>#MM93</span>
+              <h2>Marc Marquez</h2>
+            </div>
 
-          <div id="stats">
-            <div class="points-section">
-              <span>PUNTOS</span>
-              <p id="actual-score" class="score">44</p>
+            <div id="stats">
+              <div class="points-section">
+                <span>PUNTOS</span>
+                <p id="currentMM93points" class="score">NaN</p>
+              </div>
+              <div class="points-section">
+                <span>VICTORIAS SPRINT</span>
+                <p id="MM93sprints" class="score">NaN</p>
+              </div>
+              <div class="points-section">
+                <span>VICTORIAS GP</span>
+                <p id="MM93gps" class="score">NaN</p>
+              </div>
+              <div class="points-section">
+                <span>% VICTORIAS</span>
+                <p id="MM93percent" class="score">NaN</p>
+              </div>
             </div>
-            <div class="points-section">
-              <span>VICTORIAS SPRINT</span>
-              <p id="sprints" class="score">44</p>
-            </div>
-            <div class="points-section">
-              <span>VICTORIAS GP</span>
-              <p id="gps" class="score">44</p>
-            </div>
-            <div class="points-section">
-              <span>% VICTORIAS</span>
-              <p id="percent" class="score">44</p>
-            </div>
-          </div>
 
-          <div class="points-section total-points">
-            <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
-            <p id="mm93points" class="score"></p>
+            <div class="points-section total-points">
+              <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
+              <p id="MM93points" class="score"></p>
+            </div>
           </div>
+          <img class="racer-img" src="./mm93.webp" alt="Marc Marquez MotoGP 2025 season image - Ducati Lenovo Team"></img>
         </div>
-        <img id="marc-img" src="./mm93.webp" alt="Marc Marquez MotoGP 2025 season image - Ducati Lenovo Team"></img>
-      </div>
-    </section>
+      </section>
+      <section>
+        <h2>Principales rivales</h2>
+        <div id="contendientes">
+          <article>
+            <div id="hero">
+              <span>#AM73</span>
+              <h3>Alex Marquez</h3>
+              <img class="racer-img" src="./am73.webp" alt="Alex Marquez MotoGP 2025 season image - BK8 Gresini Racing MotoGP">
+            </div>
+          </article>
+          <article>
+            <div id="hero">
+              <span>#FB63</span>
+              <h3>Francesco Bagnaia</h3>
+              <img class="racer-img"  src="./fb63.webp" alt="Francesco Bagnaia MotoGP 2025 season image - Ducati Lenovo Team">
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
 
@@ -60,7 +81,7 @@
     display: flex;
     flex-direction: column;
     background: rgb(22, 22, 22);
-
+    overflow-x: hidden;
   }
 
   header {
@@ -72,15 +93,9 @@
     text-align: center;
   }
 
-  #marc-section {
-    margin: auto;
-    width: 100vw;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  main{
     max-width: 1024px;
+    margin: auto;
   }
 
   h2 {
@@ -106,11 +121,7 @@
     min-width: 8rem;
   }
 
-  #marc-points {
-    display: flex;
-  }
-
-  #marc-img {
+  .racer-img {
     mask-image: linear-gradient(black 80%, transparent);
     width: 100%;
     margin-right: -2rem;
@@ -119,6 +130,19 @@
   .total-points {
     padding: 2rem;
     font-size: 12px;
+  }
+
+  #marc-section {
+    margin: 100px auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #marc-points-section {
+    display: flex;
   }
 
   #stats {
@@ -132,6 +156,10 @@
   #mm93points {
     font-size: 120px;
     margin: 0;
+  }
+
+  #contendientes {
+    display: flex;
   }
 </style>
 
@@ -152,40 +180,79 @@
   
   
   // API data
+  // MM93 data
   const mm93points = racersData[0].points
   const mm93SprintWins = racersData[0].sprintWins
   const mm93GPWins = racersData[0].GPWins
-  const persecutorPoints = 106
+
+  // Title contenders data
+  // Alex Marquez
+  const am73points = racersData[1].points
+  const am73SprintWins = racersData[1].sprintWins
+  const am73GPWins = racersData[1].GPWins
+  // Pecco Bagnaia
+  const fb63points = racersData[2].points
+  const fb63SprintWins = racersData[2].sprintWins
+  const fb63GPWins = racersData[2].GPWins
+
+  // Races finalized
   const lastSprint = racesData[0].sprints
   const lastGP = racesData[0].gps
-
-  // Derived Data
   const totalRaces = lastGP + lastSprint
   const remainingGPs = 22 - lastGP
   const remainingSprints = 22 - lastSprint
   const maxPointsPerGP = 25
   const maxPointsPerSprint = 12
-  const percentWins = ((mm93GPWins + mm93SprintWins) / totalRaces) * 100
+  const remainingPointsPossible = remainingGPs * maxPointsPerGP + remainingSprints * maxPointsPerSprint
 
-  const totalPersecutorPosiblePoints =
-    persecutorPoints +
-    remainingGPs * maxPointsPerGP +
-    remainingSprints * maxPointsPerSprint
-  const pointsRemainingMM93Championship =
-    totalPersecutorPosiblePoints + 1 - mm93points
+  // Calculed data
+  // Marc Marquez
+  const percentWinsMM93 = ((mm93GPWins + mm93SprintWins) / totalRaces) * 100
+  const pointsToBeChampionMM93 = 1 + remainingPointsPossible + Math.max(am73points, fb63points) - mm93points
+  // Alex Marquez
+  const percentWinsAM73 = ((am73GPWins + am73SprintWins) / totalRaces) * 100
+  const pointsToBeChampionAM73 = 1 + remainingPointsPossible + Math.max(mm93points, fb63points) - am73points
+  // Pecco Bagnaia
+  const percentWinsFB63 = ((fb63GPWins + fb63SprintWins) / totalRaces) * 100
+  const pointsToBeChampionFB63 = 1 + remainingPointsPossible + Math.max(mm93points, am73points) - fb63points
 
-  
-  // ubicate HTML elements
-  const actualScore = document.getElementById('actual-score')
-  const sprints = document.getElementById('sprints')
-  const gps = document.getElementById('gps')
-  const percent = document.getElementById('percent')
-  const mm93renderPoints = document.getElementById('mm93points')
+  // locate HTML elements
+  // Marc Marquez
+  const currentMM93points = document.getElementById('currentMM93points')
+  const currentMM93sprints = document.getElementById('MM93sprints')
+  const currentMM93gps = document.getElementById('MM93gps')
+  const currentMM93percent = document.getElementById('MM93percent')
+  const remmainingMM93points = document.getElementById('MM93points')
+  // Alex Marquez
+  const currentAM73points = document.getElementById('currentAM73points')
+  const currentAM73sprints = document.getElementById('AM73sprints')
+  const currentAM73gps = document.getElementById('AM73gps')
+  const currentAM73percent = document.getElementById('AM73percent')
+  const remmainingAM73points = document.getElementById('AM73points')
+  // Pecco Bagnaia
+  const currentFB63points = document.getElementById('currentFB63points')
+  const currentFB63sprints = document.getElementById('FB63sprints')
+  const currentFB63gps = document.getElementById('FB63gps')
+  const currentFB63percent = document.getElementById('FB63percent')
+  const remmainingFB63points = document.getElementById('FB63points')
 
   // inject points into the HTML document
-  actualScore.innerHTML = mm93points
-  sprints.innerHTML = mm93SprintWins
-  gps.innerHTML = mm93GPWins
-  percent.innerHTML = percentWins + '%'
-  mm93renderPoints.innerHTML = pointsRemainingMM93Championship
+  // Marc Marquez
+  currentMM93points.innerHTML = mm93points
+  currentMM93sprints.innerHTML = mm93SprintWins
+  currentMM93gps.innerHTML = mm93GPWins
+  currentMM93percent.innerHTML = percentWinsMM93 + '%'
+  remmainingMM93points.innerHTML = pointsToBeChampionMM93
+  // Alex Marquez
+  currentAM73points.innerHTML = am73points
+  currentAM73sprints.innerHTML = am73SprintWins
+  currentAM73gps.innerHTML = am73GPWins
+  currentAM73percent.innerHTML = percentWinsAM73 + '%'
+  remmainingAM73points.innerHTML = pointsToBeChampionAM73
+  // Pecco Bagnaia
+  currentFB63points.innerHTML = fb63points
+  currentFB63sprints.innerHTML = fb63SprintWins
+  currentFB63gps.innerHTML = fb63GPWins
+  currentFB63percent.innerHTML = percentWinsFB63 + '%'
+  remmainingFB63points.innerHTML = pointsToBeChampionFB63
 </script>
