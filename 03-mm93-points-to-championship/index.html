@@ -18,23 +18,32 @@
               <h2>Marc Marquez</h2>
             </div>
 
-            <div id="stats">
+            <div class="stats">
               <div class="points-section">
                 <span>PUNTOS</span>
-                <p id="currentMM93points" class="score">NaN</p>
-              </div>
-              <div class="points-section">
-                <span>VICTORIAS SPRINT</span>
-                <p id="MM93sprints" class="score">NaN</p>
-              </div>
-              <div class="points-section">
-                <span>VICTORIAS GP</span>
-                <p id="MM93gps" class="score">NaN</p>
+                <p id="currentMM93points" class="score">...</p>
               </div>
               <div class="points-section">
                 <span>% VICTORIAS</span>
-                <p id="MM93percent" class="score">NaN</p>
+                <p id="MM93percent" class="score">...</p>
               </div>
+              <div class="points-section">
+                <span>VICTORIAS SPRINT</span>
+                <p id="MM93sprints" class="score">...</p>
+              </div>
+              <div class="points-section">
+                <span>PODIUMS SPRINT</span>
+                <p id="MM93podiumSprints" class="score">...</p>
+              </div>
+              <div class="points-section">
+                <span>VICTORIAS GP</span>
+                <p id="MM93gps" class="score">...</p>
+              </div>
+              <div class="points-section">
+                <span>PODIUMS GP</span>
+                <p id="MM93podiumGps" class="score">...</p>
+              </div>
+              
             </div>
 
             <div class="points-section total-points">
@@ -45,7 +54,7 @@
           <img class="racer-img" src="./mm93.webp" alt="Marc Marquez MotoGP 2025 season image - Ducati Lenovo Team"></img>
         </div>
       </section>
-      <section>
+      <section id="rivals">
         <h2>Principales rivales</h2>
         <div id="contendientes">
           <article>
@@ -53,6 +62,37 @@
               <span>#AM73</span>
               <h3>Alex Marquez</h3>
               <img class="racer-img" src="./am73.webp" alt="Alex Marquez MotoGP 2025 season image - BK8 Gresini Racing MotoGP">
+              <div class="stats">
+                <div class="points-section">
+                  <span>PUNTOS</span>
+                  <p id="currentAM73points" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>% VICTORIAS</span>
+                  <p id="AM73percent" class="score">NaN</p>
+                </div>
+                <div class="points-section">
+                  <span>VICTORIAS SPRINT</span>
+                  <p id="AM73sprints" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>PODIUMS SPRINT</span>
+                  <p id="AM73podiumSprints" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>VICTORIAS GP</span>
+                  <p id="AM73gps" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>PODIUMS GP</span>
+                  <p id="AM73podiumGps" class="score">...</p>
+                </div>
+              </div>
+
+              <div class="points-section total-points">
+                <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
+                <p id="AM73points" class="score"></p>
+              </div>
             </div>
           </article>
           <article>
@@ -60,6 +100,38 @@
               <span>#FB63</span>
               <h3>Francesco Bagnaia</h3>
               <img class="racer-img"  src="./fb63.webp" alt="Francesco Bagnaia MotoGP 2025 season image - Ducati Lenovo Team">
+              <div class="stats">
+                <div class="points-section">
+                  <span>PUNTOS</span>
+                  <p id="currentFB63points" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>% VICTORIAS</span>
+                  <p id="FB63percent" class="score">NaN</p>
+                </div>
+                <div class="points-section">
+                  <span>VICTORIAS SPRINT</span>
+                  <p id="FB63sprints" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>PODIUMS SPRINT</span>
+                  <p id="FB63podiumSprints" class="score">...</p>
+                </div>
+                <div class="points-section">
+                  <span>VICTORIAS GP</span>
+                  <p id="FB63gps" class="score">...</p>
+                </div>
+                 <div class="points-section">
+                  <span>PODIUMS GP</span>
+                  <p id="FB63podiumGps" class="score">...</p>
+                </div>
+              </div>
+
+              <div class="points-section total-points">
+                <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
+                <p id="FB63points" class="score"></p>
+              </div>
+            </div>
             </div>
           </article>
         </div>
@@ -124,7 +196,8 @@
   .racer-img {
     mask-image: linear-gradient(black 80%, transparent);
     width: 100%;
-    margin-right: -2rem;
+    height: 100%;
+    margin-right: -3rem;
   }
 
   .total-points {
@@ -143,14 +216,16 @@
 
   #marc-points-section {
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  #stats {
+  .stats {
     display: grid;
     margin-bottom: 3rem;
     gap: 1rem;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
   }
 
   #mm93points {
@@ -160,6 +235,11 @@
 
   #contendientes {
     display: flex;
+    gap: 2rem;
+  }
+
+  #rivals {
+    margin-bottom: 6rem;
   }
 </style>
 
@@ -183,17 +263,24 @@
   // MM93 data
   const mm93points = racersData[0].points
   const mm93SprintWins = racersData[0].sprintWins
+  const mm93SprintPodiums = racersData[0].sprintPodiums
   const mm93GPWins = racersData[0].GPWins
+  const mm93GPPodiums = racersData[0].GPPodiums
 
   // Title contenders data
   // Alex Marquez
   const am73points = racersData[1].points
   const am73SprintWins = racersData[1].sprintWins
+  const am73SprintPodiums = racersData[1].sprintPodiums
   const am73GPWins = racersData[1].GPWins
+  const am73GPPodiums = racersData[1].GPPodiums
+
   // Pecco Bagnaia
   const fb63points = racersData[2].points
   const fb63SprintWins = racersData[2].sprintWins
+  const fb63SprintPodiums = racersData[2].sprintPodiums
   const fb63GPWins = racersData[2].GPWins
+  const fb63GPPodiums = racersData[2].GPPodiums
 
   // Races finalized
   const lastSprint = racesData[0].sprints
@@ -219,40 +306,52 @@
   // locate HTML elements
   // Marc Marquez
   const currentMM93points = document.getElementById('currentMM93points')
-  const currentMM93sprints = document.getElementById('MM93sprints')
-  const currentMM93gps = document.getElementById('MM93gps')
   const currentMM93percent = document.getElementById('MM93percent')
+  const currentMM93sprints = document.getElementById('MM93sprints')
+  const currentMM93podiumSprints = document.getElementById('MM93podiumSprints')
+  const currentMM93gps = document.getElementById('MM93gps')
+  const currentMM93podiumGPs = document.getElementById('MM93podiumGps')
   const remmainingMM93points = document.getElementById('MM93points')
   // Alex Marquez
   const currentAM73points = document.getElementById('currentAM73points')
-  const currentAM73sprints = document.getElementById('AM73sprints')
-  const currentAM73gps = document.getElementById('AM73gps')
   const currentAM73percent = document.getElementById('AM73percent')
+  const currentAM73sprints = document.getElementById('AM73sprints')
+  const currentAM73podiumSprints = document.getElementById('AM73podiumSprints')
+  const currentAM73gps = document.getElementById('AM73gps')
+  const currentAM73podiumGPs = document.getElementById('AM73podiumGps')
   const remmainingAM73points = document.getElementById('AM73points')
   // Pecco Bagnaia
   const currentFB63points = document.getElementById('currentFB63points')
-  const currentFB63sprints = document.getElementById('FB63sprints')
-  const currentFB63gps = document.getElementById('FB63gps')
   const currentFB63percent = document.getElementById('FB63percent')
+  const currentFB63sprints = document.getElementById('FB63sprints')
+  const currentFB63podiumSprints = document.getElementById('FB63podiumSprints')
+  const currentFB63gps = document.getElementById('FB63gps')
+  const currentFB63podiumGPs = document.getElementById('FB63podiumGps')
   const remmainingFB63points = document.getElementById('FB63points')
 
   // inject points into the HTML document
   // Marc Marquez
   currentMM93points.innerHTML = mm93points
-  currentMM93sprints.innerHTML = mm93SprintWins
-  currentMM93gps.innerHTML = mm93GPWins
   currentMM93percent.innerHTML = percentWinsMM93 + '%'
+  currentMM93sprints.innerHTML = mm93SprintWins
+  currentMM93podiumSprints.innerHTML = mm93SprintPodiums
+  currentMM93gps.innerHTML = mm93GPWins
+  currentMM93podiumGPs.innerHTML = mm93GPPodiums
   remmainingMM93points.innerHTML = pointsToBeChampionMM93
   // Alex Marquez
   currentAM73points.innerHTML = am73points
-  currentAM73sprints.innerHTML = am73SprintWins
-  currentAM73gps.innerHTML = am73GPWins
   currentAM73percent.innerHTML = percentWinsAM73 + '%'
+  currentAM73sprints.innerHTML = am73SprintWins
+  currentAM73podiumSprints.innerHTML = am73SprintPodiums
+  currentAM73gps.innerHTML = am73GPWins
+  currentAM73podiumGPs.innerHTML = am73GPPodiums
   remmainingAM73points.innerHTML = pointsToBeChampionAM73
   // Pecco Bagnaia
   currentFB63points.innerHTML = fb63points
-  currentFB63sprints.innerHTML = fb63SprintWins
-  currentFB63gps.innerHTML = fb63GPWins
   currentFB63percent.innerHTML = percentWinsFB63 + '%'
+  currentFB63sprints.innerHTML = fb63SprintWins
+  currentFB63podiumSprints.innerHTML = fb63SprintPodiums
+  currentFB63gps.innerHTML = fb63GPWins
+  currentFB63podiumGPs.innerHTML = fb63GPPodiums
   remmainingFB63points.innerHTML = pointsToBeChampionFB63
 </script>
