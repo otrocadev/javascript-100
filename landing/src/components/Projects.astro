@@ -33,7 +33,7 @@ const finalProjects = PROJECTS.slice().reverse()
             transition:name={`animation-${project.slug}`}
             class="project-card"
           >
-            <a href={`/${project.slug}`}>
+            <a class="relative" href={`/${project.slug}`}>
               <span class="transition-all text-black absolute top-2 left-2 -rotate-12 text-2xl font-bold">
                 #{num}
               </span>
@@ -43,7 +43,7 @@ const finalProjects = PROJECTS.slice().reverse()
                 alt={`Screenshot of the project ${project.title}`}
               />
             </a>
-            <div class="p-5">
+            <div class="p-5 flex flex-col justify-center">
               <h2 class="text-4xl font-bold tracking-tight">
                 <a
                   href={`/${project.slug}`}

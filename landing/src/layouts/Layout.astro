@@ -153,11 +153,12 @@ const { title } = Astro.props
     }
 
     .project-card {
-      position: relative;
       overflow: hidden;
       background: var(--seablue);
       border-radius: 1rem;
       transition: all 300ms ease-in-out;
+      display: grid;
+      grid-template-rows: 4fr 7fr;
     }
 
     .project-card:hover,
