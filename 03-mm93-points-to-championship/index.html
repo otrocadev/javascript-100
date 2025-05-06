@@ -44,9 +44,9 @@
           </div>
         </div>
         <div>
-          <div class="total-points">
+          <div class="total-points contestant-points marc-points">
             <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
-            <p id="MM93points" class="score"></p>
+            <p id="MM93points" class="score">...</p>
           </div>
           <img class="racer-img" src="./mm93.webp" alt="Marc Marquez MotoGP 2025 season image - Ducati Lenovo Team"></img>
         </div>
@@ -56,13 +56,14 @@
         <h2>Principales rivales</h2>
         <div id="contendientes">
           <article>
-            <div id="hero">
+            <div id="hero" class="contestant-points alex-points">
               <span>#AM73</span>
               <h3>Alex Marquez</h3>
               <div class="total-points">
                 <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
-                <p id="AM73points" class="score"></p>
+                <p id="AM73points" class="score">...</p>
               </div>
+            </div>
               <img class="racer-img" src="./am73.webp" alt="Alex Marquez MotoGP 2025 season image - BK8 Gresini Racing MotoGP">
               <div class="stats">
                 <div class="points-section">
@@ -90,16 +91,16 @@
                   <p id="AM73podiumGps" class="score">...</p>
                 </div>
               </div>     
-            </div>
           </article>
           <article>
-            <div id="hero">
+            <div id="hero" class="contestant-points">
               <span>#FB63</span>
               <h3>Francesco Bagnaia</h3>
               <div class="total-points">
                 <span>PUNTOS RESTANTES PARA SER CAMPEÓN</span>
-                <p id="FB63points" class="score"></p>
+                <p id="FB63points" class="score">...</p>
               </div>
+            </div>
               <img class="racer-img"  src="./fb63.webp" alt="Francesco Bagnaia MotoGP 2025 season image - Ducati Lenovo Team">
               <div class="stats">
                 <div class="points-section">
@@ -127,7 +128,7 @@
                   <p id="FB63podiumGps" class="score">...</p>
                 </div>
               </div>
-            </div>
+            
             </div>
           </article>
         </div>
@@ -173,6 +174,12 @@
     font-size: 48px;
   }
 
+  h3 {
+    font-size: 36px;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
   section {
     margin: 0 2rem;
   }
@@ -208,17 +215,17 @@
   }
 
   .total-points {
-    padding: 2rem;
     font-size: 12px;
     text-align: end;
 
     & p {
       font-size: 70px;
+      margin: auto 0;
     }
   }
 
   #marc-section {
-    margin-top: 50px;
+    margin-top: 2rem;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -227,7 +234,7 @@
 
   #marc-points-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     width: 100%;
   }
 
@@ -251,6 +258,24 @@
 
   #rivals {
     margin-bottom: 6rem;
+
+    & h2 {
+      text-align: center;
+    }
+  }
+
+  .contestant-points {
+    background: linear-gradient(25deg,transparent 0%, rgba(223, 24, 39, 1) 60%);
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+
+  .marc-points {
+    margin-left: 4rem;
+  }
+
+  .alex-points {
+    background: linear-gradient(25deg,transparent 0%, rgb(155,174,228) 60%);
   }
 </style>
 
